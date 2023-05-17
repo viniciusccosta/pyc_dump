@@ -6,9 +6,6 @@ from datetime import datetime
 
 # ======================================================================================================================
 PYTHON_MAGIC = {
-    # https://github.com/google/pytype/blob/main/pytype/pyc/magic.py
-    # https://stackoverflow.com/questions/7807541/is-there-a-way-to-know-by-which-python-version-the-pyc-file-was-compiled
-
     # Python 1
     20121: (1, 5),
     50428: (1, 6),
@@ -137,28 +134,6 @@ PYTHON_MAGIC = {
 
 # ======================================================================================================================
 def show_code(filepath):
-    """
-        https://stackoverflow.com/a/32562303
-
-        header_sizes = [
-                # (size, first version this applies to)
-
-                (8,  (0, 9, 2)),  # 2 bytes magic number, \r\n, 4 bytes UNIX timestamp
-
-                (12, (3, 6)),     # added 4 bytes file size
-                # bytes 4-8 are flags, meaning of 9-16 depends on what flags are set
-                # bit 0 not set: 9-12 timestamp, 13-16 file size
-                # bit 0 set: 9-16 file hash (SipHash-2-4, k0 = 4 bytes of the file, k1 = 0)
-
-                (16, (3, 7)),     # inserted 4 bytes bit flag field at 4-8
-                # future version may add more bytes still, at which point we can extend
-
-                # this table. It is correct for Python versions up to 3.9
-            ]
-    :param filepath:
-    :return:
-    """
-
     header_sizes = [
         (8,  (0, 9, 2)),
         (12, (3, 6)),
